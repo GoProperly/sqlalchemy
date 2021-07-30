@@ -376,7 +376,10 @@ class ARRAY(sqltypes.ARRAY):
 
             def handle_raw_string(value):
                 inner = re.match(r"^{(.*)}$", value).group(1)
-                return inner.split(",") if inner else []
+                # Hack to fix escape quotations added to spaced strings in arrays
+                # Better solution would be to either redo the regex or use the csv module for parsing.
+                output = inner.split(",") if inner else []
+                return [x.replace('"','') for x in output]
 
             def process(value):
                 if value is None:
