@@ -134,7 +134,8 @@ def run_setup(with_cext):
             )
 
         kwargs["ext_modules"] = []
-    setup(version="1.4.17", cmdclass=cmdclass, distclass=Distribution, **kwargs)
+
+    setup(version=VERSION, cmdclass=cmdclass, distclass=Distribution, **kwargs)
 
 
 if not cpython:
